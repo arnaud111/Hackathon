@@ -7,5 +7,3 @@ services:
     tty: true
     ports:
       - "8080"
-    volumes:
-      - ".env:/.env"
