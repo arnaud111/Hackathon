@@ -1,0 +1,11 @@
+version: "3"
+services:
+  Hackaton_backend:
+    container_name: "Hackaton_backend_container"
+    image: dixennaxos/hackaton:latest
+    restart: "always"
+    tty: true
+    ports:
+      - "8080"
+    volumes:
+      - ".env:/.env"
