@@ -2,7 +2,7 @@ version: "3"
 services:
   Hackaton_backend:
     container_name: "Hackaton_backend_container"
-    image: dixennaxos/hackaton:latest
+    image: dixennaxos/hackathon:latest
     restart: "always"
     tty: true
     ports:
