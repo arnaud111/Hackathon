@@ -1,6 +1,8 @@
 package com.greenring.hackathon.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import lombok.Builder;
 import lombok.Value;
@@ -8,8 +10,8 @@ import lombok.Value;
 @Value
 @Builder
 public class Distributor {
-    String _id;
+    @Builder.Default UUID _id = UUID.randomUUID();
     String name;
     String room;
-    List<Product> products;
+    @Builder.Default List<Product> products = new ArrayList<>();
 }

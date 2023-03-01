@@ -1,4 +1,8 @@
 package com.greenring.hackathon.domain.port.server;
 
-public interface TrashPersistenceSpi {
+import com.greenring.hackathon.domain.model.Trash;
+
+import java.util.UUID;
+
+public interface TrashPersistenceSpi extends PersistenceSpi<Trash, UUID>{
 }

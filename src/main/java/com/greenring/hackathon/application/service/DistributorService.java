@@ -5,16 +5,21 @@ import com.greenring.hackathon.application.service.validator.DistributorValidato
 import com.greenring.hackathon.application.service.validator.UserValidator;
 import com.greenring.hackathon.domain.model.Distributor;
 import com.greenring.hackathon.domain.model.User;
+import com.greenring.hackathon.domain.port.client.DistributorApi;
+import com.greenring.hackathon.domain.port.server.DistributorPersistenceSpi;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class DistributorService {
-/*
+public class DistributorService implements DistributorApi {
+
+    private final DistributorPersistenceSpi spi;
+
+    @Override
     public Either<ApplicationError, Distributor> create(Distributor distributor) {
         return DistributorValidator.validate(distributor)
                 .toEither()
                 .peekLeft(System.out::println)
                 .flatMap(spi::save);
-    }*/
+    }
 }

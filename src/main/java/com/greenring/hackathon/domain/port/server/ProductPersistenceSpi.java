@@ -1,4 +1,8 @@
 package com.greenring.hackathon.domain.port.server;
 
-public interface ProductPersistenceSpi {
+import com.greenring.hackathon.domain.model.Product;
+
+import java.util.UUID;
+
+public interface ProductPersistenceSpi extends PersistenceSpi<Product, UUID>{
 }
