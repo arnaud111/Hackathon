@@ -1,5 +1,6 @@
 package com.greenring.hackathon.application.service;
 
+import com.greenring.hackathon.application.dto.WasteTrashResponse;
 import com.greenring.hackathon.domain.port.client.WasteApi;
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +22,7 @@ public class WasteService implements WasteApi {
 
     @Override
     @Transactional
-    public List<String> getPackagingMaterial(String barcode) {
+    public List<WasteTrashResponse> getPackagingMaterial(String barcode) {
 
         try {
             URL url = new URL("https://world.openfoodfacts.org/api/v0/product/" + barcode);
@@ -51,15 +52,13 @@ public class WasteService implements WasteApi {
         return null;
     }
 
-    private String mappMaterial(String material) {
+    private String getTrashColorFromMaterial(String material) {
 
-        switch (material) {
-            case "plastic":
-                return "yellow";
-            case "glass":
-                return "green";
-            case "cardboard":
-                return ""
-        }
+        return switch (material) {
+            case "plastic" -> "yellow";
+            case "glass" -> "green";
+            case "cardboard", "paper" -> "blue";
+            default -> "black";
+        };
     }
 }
