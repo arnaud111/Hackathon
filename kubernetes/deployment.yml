@@ -16,7 +16,7 @@ spec:
         - name: greenringapi
           image: gcr.io/devops-kube-4al2/greenringapi:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 7790
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: production
