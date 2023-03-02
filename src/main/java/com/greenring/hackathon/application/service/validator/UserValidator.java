@@ -8,7 +8,12 @@ import static io.vavr.API.Valid;
 
 public interface UserValidator {
     static Validation<ApplicationError, User> validate(User user){
-        return user.get_id() != null && user.getFirstname() != null && user.getLastname() != null && user.getLogin() != null && user.getPassword() != null
+        return user.get_id() != null
+                && user.getFirstname() != null
+                && user.getLastname() != null
+                && user.getLogin() != null
+                && user.getPassword() != null
+                && user.getAdmin() != null
                 ? Valid(user)
                 : Invalid(new ApplicationError("Wrong user creation", "Check user's informations", user, null)
         );

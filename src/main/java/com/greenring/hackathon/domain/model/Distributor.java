@@ -14,4 +14,14 @@ public class Distributor {
     String name;
     String room;
     @Builder.Default List<Product> products = new ArrayList<>();
+
+    public Distributor deleteProduct(Product product){
+        this.products.remove(product);
+        return new Distributor(
+                this._id,
+                this.name,
+                this.room,
+                this.products
+        );
+    }
 }

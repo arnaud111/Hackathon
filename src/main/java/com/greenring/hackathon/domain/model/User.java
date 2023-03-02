@@ -15,4 +15,16 @@ public class User {
     String firstname;
     String lastname;
     @Builder.Default Boolean admin = false;
+
+    public User updateCoins(Integer coins){
+        return new User(
+                this._id,
+                this.login,
+                this.password,
+                coins,
+                this.firstname,
+                this.lastname,
+                this.admin
+        );
+    }
 }

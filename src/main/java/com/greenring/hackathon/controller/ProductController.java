@@ -3,17 +3,18 @@ package com.greenring.hackathon.controller;
 import com.greenring.hackathon.application.dto.ProductCreationDto;
 import com.greenring.hackathon.application.mapper.ProductDtoMapper;
 import com.greenring.hackathon.domain.model.Product;
+import com.greenring.hackathon.domain.model.Product;
 import com.greenring.hackathon.domain.port.client.ProductApi;
 import io.swagger.annotations.Api;
+import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +31,18 @@ public class ProductController {
                 .create(ProductDtoMapper.productCreationToDomain(dto))
                 .map(ProductDtoMapper::toDto)
                 .fold(ResponseEntity.badRequest()::body, ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/{product_id}")
+    public Option<Product> getProduct(@PathVariable UUID product_id) {
+        return productApi
+                .getOne(product_id);
+    }
+
+    @GetMapping(value = "/")
+    public List<Product> getProducts() {
+        return productApi
+                .getAll();
     }
 
 }

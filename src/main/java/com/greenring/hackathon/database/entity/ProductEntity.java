@@ -7,14 +7,16 @@ import lombok.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Value
 @Builder
 @Getter
 @Setter
-@Document(collection = "product")
+@Document(collection = "products")
 public class ProductEntity {
     @Id
-    String _id;
+    UUID _id;
     String name;
-    int price;
+    Integer price;
 }

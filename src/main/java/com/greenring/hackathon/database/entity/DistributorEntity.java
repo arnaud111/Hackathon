@@ -8,16 +8,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.UUID;
 
 @Value
 @Builder
 @Getter
 @Setter
-@Document(collection = "distributor")
+@Document(collection = "distributors")
 public class DistributorEntity {
-
     @Id
-    String _id;
+    UUID _id;
     String name;
     String room;
     List<ProductEntity> products;

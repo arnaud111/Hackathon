@@ -13,4 +13,6 @@ public interface PersistenceSpi<T, ID>  {
     Option<T> findById(ID id);
 
     List<T> findAll();
+
+
 }

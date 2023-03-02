@@ -1,7 +1,10 @@
 package com.greenring.hackathon.database;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.bson.UuidRepresentation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,7 +14,8 @@ public class MongoConfig {
 
     public @Bean
     MongoClient mongoClient() {
-        return MongoClients.create("mongodb+srv://greenring:NBy6oNuUxH5N3nsg@greenring.hwedwp7.mongodb.net/");
+        final MongoClientSettings clientSettings = MongoClientSettings.builder().uuidRepresentation(UuidRepresentation.STANDARD).applyConnectionString(new ConnectionString("mongodb+srv://greenring:NBy6oNuUxH5N3nsg@greenring.hwedwp7.mongodb.net/")).build();
+        return MongoClients.create(clientSettings);
     }
 
     public @Bean

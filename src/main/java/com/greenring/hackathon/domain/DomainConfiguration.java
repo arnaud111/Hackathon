@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Configuration;
 public class DomainConfiguration {
 
     @Bean
-    DistributorApi distributorApi(DistributorPersistenceSpi distributorPersistenceSpi) {
-        return new DistributorService(distributorPersistenceSpi);
+    DistributorApi distributorApi(DistributorPersistenceSpi distributorPersistenceSpi, ProductPersistenceSpi productPersistenceSpi, UserPersistenceSpi userPersistenceSpi) {
+        return new DistributorService(distributorPersistenceSpi,userPersistenceSpi,productPersistenceSpi);
     }
 
     @Bean

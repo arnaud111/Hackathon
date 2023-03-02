@@ -7,18 +7,20 @@ import lombok.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Value
 @Builder
 @Getter
 @Setter
-@Document(collection = "user")
+@Document(collection = "users")
 public class UserEntity {
 
-    @Id
-    String _id;
+    @Id UUID _id;
     String login;
     String password;
-    Integer coins = 0;
+    Integer coins;
     String firstname;
     String lastname;
+    Boolean admin;
 }
