@@ -1,5 +1,7 @@
 package com.greenring.hackathon.application.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.greenring.hackathon.application.dto.WasteTrashResponse;
 import com.greenring.hackathon.domain.port.client.WasteApi;
 import lombok.RequiredArgsConstructor;
 
@@ -8,8 +10,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -21,7 +25,7 @@ public class WasteService implements WasteApi {
 
     @Override
     @Transactional
-    public List<String> getPackagingMaterial(String barcode) {
+    public List<WasteTrashResponse> getPackagingMaterial(String barcode) {
 
         try {
             URL url = new URL("https://world.openfoodfacts.org/api/v0/product/" + barcode);
@@ -36,16 +40,33 @@ public class WasteService implements WasteApi {
             }
             in.close();
 
-            System.out.println(response.toString());
-
             JSONObject myResponse = new JSONObject(response.toString());
+            JSONArray packagingsArray = myResponse.getJSONObject("product").getJSONObject("ecoscore_data").getJSONObject("adjustments").getJSONObject("packaging").getJSONArray("packagings");
+            System.out.println(packagingsArray.toString());
+            List<WasteTrashResponse> wasteList = new ArrayList<>();
+            for (int i=0; i < packagingsArray.length(); i++) {
+                String material = packagingsArray.getJSONObject(i).getString("material").split(":")[1];
+                String shape = packagingsArray.getJSONObject(i).getString("shape").split(":")[1];
+                if (shape.equals("unknown"))shape=material;
 
+                WasteTrashResponse trash = new WasteTrashResponse(this.getTrashColorFromMaterial(material), shape, material);
+                wasteList.add(trash);
+            }
             con.disconnect();
+            return wasteList;
 
         } catch (IOException | JSONException e) {
             return null;
         }
+    }
 
-        return null;
+    private String getTrashColorFromMaterial(String material) {
+
+        return switch (material) {
+            case "plastic" -> "yellow";
+            case "glass" -> "green";
+            case "cardboard", "paper" -> "blue";
+            default -> "black";
+        };
     }
 }

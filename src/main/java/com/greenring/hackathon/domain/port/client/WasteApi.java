@@ -1,8 +1,10 @@
 package com.greenring.hackathon.domain.port.client;
 
+import com.greenring.hackathon.application.dto.WasteTrashResponse;
+
 import java.util.List;
 
 public interface WasteApi {
 
-    List<String> getPackagingMaterial(String barcode);
+    List<WasteTrashResponse> getPackagingMaterial(String barcode);
 }
