@@ -24,39 +24,39 @@ jobs:
         run: mvn clean install
 
       - name: Setup python
-          uses: actions/setup-python@v4
-          with:
-            python-version: '3.7'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
 
       - name: Export gcloud related env variable
-          run: export CLOUDSDK_PYTHON="/usr/bin/python3" | export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+        run: export CLOUDSDK_PYTHON="/usr/bin/python3" | export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
       - id: 'google-auth'
-          uses: 'google-github-actions/auth@v1'
-          with:
-            credentials_json: '${{ secrets.GKE_SA_KEY }}'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
       - name: Set up gcloud
-          uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/setup-gcloud@v1
 
       - name: Configure Docker
-          run: |
-            gcloud auth configure-docker
+        run: |
+          gcloud auth configure-docker
 
       - name: Build and Push Docker Image
-          uses: docker/build-push-action@v2
-          with:
-            context: .
-            push: true
-            tags: gcr.io/devops-kube-4al2/greenringapi:latest
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: gcr.io/devops-kube-4al2/greenringapi:latest
 
       - name: Install gcloud component auth plugin
-          run: gcloud components install gke-gcloud-auth-plugin
+        run: gcloud components install gke-gcloud-auth-plugin
 
       - name: Configure kubectl
-          run: |
-            gcloud container clusters get-credentials archi-cluster --zone=europe-west2
+        run: |
+          gcloud container clusters get-credentials archi-cluster --zone=europe-west2
 
       - name: Deploy API
-          run: |
-            kubectl apply -f kubernetes/deployment.yml
-            kubectl apply -f kubernetes/service.yml
+        run: |
+          kubectl apply -f kubernetes/deployment.yml
+          kubectl apply -f kubernetes/service.yml
