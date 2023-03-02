@@ -10,9 +10,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
@@ -36,9 +36,10 @@ public class WasteService implements WasteApi {
             }
             in.close();
 
-            System.out.println(response.toString());
-
             JSONObject myResponse = new JSONObject(response.toString());
+            JSONArray packagings = myResponse.getJSONObject("ecoscore_data").getJSONObject("adjustments").getJSONObject("packaging").getJSONArray("packagings");
+
+
 
             con.disconnect();
 
@@ -46,6 +47,19 @@ public class WasteService implements WasteApi {
             return null;
         }
 
+
         return null;
+    }
+
+    private String mappMaterial(String material) {
+
+        switch (material) {
+            case "plastic":
+                return "yellow";
+            case "glass":
+                return "green";
+            case "cardboard":
+                return ""
+        }
     }
 }
