@@ -14,4 +14,5 @@ public class User {
     @Builder.Default Integer coins = 0;
     String firstname;
     String lastname;
+    @Builder.Default Boolean admin = false;
 }

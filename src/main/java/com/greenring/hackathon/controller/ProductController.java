@@ -1,10 +1,8 @@
-package com.greenring.hackathon.controller.product;
+package com.greenring.hackathon.controller;
 
-import com.greenring.hackathon.controller.distributor.request.CreateDistributorRequest;
-import com.greenring.hackathon.controller.product.request.CreateProductRequest;
-import com.greenring.hackathon.domain.model.Distributor;
+import com.greenring.hackathon.application.dto.ProductCreationDto;
+import com.greenring.hackathon.application.mapper.ProductDtoMapper;
 import com.greenring.hackathon.domain.model.Product;
-import com.greenring.hackathon.domain.port.client.DistributorApi;
 import com.greenring.hackathon.domain.port.client.ProductApi;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -23,16 +21,14 @@ import javax.validation.Valid;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductApi api;
+    private final ProductApi productApi;
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> create(@RequestBody @Valid CreateProductRequest createProductRequest) {
-        Product newProduct =  Product.builder()
-                .name(createProductRequest.getName())
-                .price(createProductRequest.getPrice())
-                .build();
-        return api
-                .create(newProduct)
+    public ResponseEntity<Object> create(@RequestBody @Valid ProductCreationDto dto) {
+
+        return productApi
+                .create(ProductDtoMapper.productCreationToDomain(dto))
+                .map(ProductDtoMapper::toDto)
                 .fold(ResponseEntity.badRequest()::body, ResponseEntity::ok);
     }
 

@@ -1,7 +1,7 @@
-package com.greenring.hackathon.controller.trash;
+package com.greenring.hackathon.controller;
 
-import com.greenring.hackathon.controller.trash.request.CreateTrashRequest;
-import com.greenring.hackathon.domain.model.Trash;
+import com.greenring.hackathon.application.dto.TrashCreationDto;
+import com.greenring.hackathon.application.mapper.TrashDtoMapper;
 import com.greenring.hackathon.domain.port.client.TrashApi;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +20,14 @@ import javax.validation.Valid;
 @RequestMapping("/trashs")
 public class TrashController {
 
-    private final TrashApi api;
-/*
+    private final TrashApi trashApi;
+
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> create(@RequestBody @Valid CreateTrashRequest createTrashRequest) {
-        Trash newTrash =  Trash.builder().color(createTrashRequest.getColor())
-                .room(createTrashRequest.getRoom())
-                .site(createTrashRequest.getSite())
-                .build();
-        return api
-                .create(newTrash)
+    public ResponseEntity<Object> create(@RequestBody @Valid TrashCreationDto dto) {
+
+        return trashApi
+                .create(TrashDtoMapper.trashCreationToDomain(dto))
+                .map(TrashDtoMapper::toDto)
                 .fold(ResponseEntity.badRequest()::body, ResponseEntity::ok);
-    }*/
+    }
 }

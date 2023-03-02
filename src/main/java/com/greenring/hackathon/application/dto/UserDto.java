@@ -13,6 +13,7 @@ public record UserDto(
         String password,
         Integer coins,
         String firstname,
-        String lastname
+        String lastname,
+        Boolean admin
 ) {
 }
