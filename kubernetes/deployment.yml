@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greenringapi
+spec:
+  selector:
+    matchLabels:
+      app: greenringapi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: greenringapi
+    spec:
+      containers:
+        - name: greenringapi
+          image: gcr.io/devops-kube-4al2/greenringapi:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
