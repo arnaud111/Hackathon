@@ -40,23 +40,20 @@ public class WasteService implements WasteApi {
             }
             in.close();
 
-            System.out.println(response.toString());
-
             JSONObject myResponse = new JSONObject(response.toString());
-            System.out.println("non");
             JSONArray packagingsArray = myResponse.getJSONObject("product").getJSONObject("ecoscore_data").getJSONObject("adjustments").getJSONObject("packaging").getJSONArray("packagings");
             System.out.println(packagingsArray.toString());
-            List<WasteTrashResponse> trashList = new ArrayList<>();
+            List<WasteTrashResponse> wasteList = new ArrayList<>();
             for (int i=0; i < packagingsArray.length(); i++) {
                 String material = packagingsArray.getJSONObject(i).getString("material").split(":")[1];
                 String shape = packagingsArray.getJSONObject(i).getString("shape").split(":")[1];
                 if (shape.equals("unknown"))shape=material;
 
                 WasteTrashResponse trash = new WasteTrashResponse(this.getTrashColorFromMaterial(material), shape, material);
-                trashList.add(trash);
+                wasteList.add(trash);
             }
             con.disconnect();
-            return trashList;
+            return wasteList;
 
         } catch (IOException | JSONException e) {
             return null;
