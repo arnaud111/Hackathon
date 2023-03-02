@@ -29,7 +29,7 @@ public class DomainConfiguration {
     }
 
     @Bean
-    UserApi userApi(UserPersistenceSpi userPersistenceSpi) {
-        return new UserService(userPersistenceSpi);
+    UserApi userApi(UserPersistenceSpi userPersistenceSpi, TransactionPersistenceSpi transactionPersistenceSpi) {
+        return new UserService(userPersistenceSpi,transactionPersistenceSpi);
     }
 }

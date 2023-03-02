@@ -11,6 +11,7 @@ import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +37,16 @@ public class TransactionService implements TransactionApi {
     @Override
     public Option<Transaction> getOne(UUID product_id) {
         return spi.findById(product_id);
+    }
+
+    @Override
+    public List<Transaction> getToday(UUID user_id, LocalDateTime startDate, LocalDateTime endDate) {
+        return spi.findAllTransactionsby_idAnddate(user_id,startDate,endDate);
+    }
+
+    @Override
+    public List<Transaction> getHistoric(UUID user_id, LocalDateTime startDate, LocalDateTime endDate) {
+        return spi.findAllTransactionsbyDate(user_id,startDate,endDate);
     }
 
 }

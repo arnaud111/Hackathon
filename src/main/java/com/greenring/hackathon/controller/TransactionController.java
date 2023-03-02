@@ -1,6 +1,7 @@
 package com.greenring.hackathon.controller;
 
 import com.greenring.hackathon.application.dto.TransactionCreationDto;
+import com.greenring.hackathon.application.dto.TransactionSearchDto;
 import com.greenring.hackathon.application.mapper.TransactionDtoMapper;
 import com.greenring.hackathon.domain.model.Transaction;
 import com.greenring.hackathon.domain.port.client.TransactionApi;
@@ -12,6 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,6 +51,20 @@ public class TransactionController {
                 .getAll();
     }
 
-    //@GetMapping(value = "/{user_id}")
+    @GetMapping(value = "/today/{user_id}")
+    public List<Transaction> getTodaytransactions(@PathVariable UUID user_id){
+        LocalDateTime today = LocalDate.now().atTime(0,0);
+        System.out.println(today);
+        return transactionsApi.getToday(user_id,today,today);
 
+    }
+
+    @GetMapping(value = "/historic/{user_id}")
+    public List<Transaction> getTransactionsByDate(@PathVariable UUID user_id, @RequestBody TransactionSearchDto dto){
+        return transactionsApi.getHistoric(user_id,
+                dto.startDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                dto.endDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+        );
+
+    }
 }

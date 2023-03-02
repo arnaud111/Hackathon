@@ -10,7 +10,7 @@ import static io.vavr.API.Valid;
 public interface TransactionValidator {
 
     static Validation<ApplicationError, Transaction> validate(Transaction transaction){
-        return transaction.get_id() != null && transaction.getDate() != null && transaction.getUser_id() != null && transaction.getProduct_id() != null
+        return transaction.get_id() != null && transaction.getDate() != null && transaction.getUser_id() != null
                 ? Valid(transaction)
                 : Invalid(new ApplicationError("Wrong transaction creation", "Check transaction's informations", transaction, null)
         );

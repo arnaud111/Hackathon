@@ -12,6 +12,7 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -44,5 +45,17 @@ public class TransactionDatabaseAdapter implements TransactionPersistenceSpi {
     @Transactional
     public List<Transaction> findAll() {
         return repository.findAll().stream().map(TransactionEntityMapper::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<Transaction> findAllTransactionsby_idAnddate(UUID id, LocalDateTime startDate, LocalDateTime endDate) {
+        return repository.findAllTransactionsby_idAnddate(id,startDate,endDate).stream().map(TransactionEntityMapper::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<Transaction> findAllTransactionsbyDate(UUID id, LocalDateTime startDate, LocalDateTime endDate) {
+        return repository.findAllTransactionsbyDate(id,startDate,endDate).stream().map(TransactionEntityMapper::toDomain).collect(Collectors.toList());
     }
 }
