@@ -6,6 +6,7 @@ import com.greenring.hackathon.domain.model.Trash;
 import com.greenring.hackathon.domain.model.User;
 import com.greenring.hackathon.domain.port.client.TrashApi;
 import com.greenring.hackathon.domain.port.client.UserApi;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
     private final UserApi api;
-
+/*
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> create(@RequestBody @Valid CreateUserRequest createUserRequest) {
         //TODO Mapper et supprimé cette merde en dessous
@@ -35,5 +36,5 @@ public class UserController {
         return api
                 .create(newTrash)
                 .fold(ResponseEntity.badRequest()::body, ResponseEntity::ok);
-    }
+    }*/
 }

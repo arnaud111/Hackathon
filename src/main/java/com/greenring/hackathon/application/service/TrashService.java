@@ -9,6 +9,8 @@ import com.greenring.hackathon.domain.port.client.TrashApi;
 import com.greenring.hackathon.domain.port.server.TrashPersistenceSpi;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class TrashService implements TrashApi {
@@ -16,6 +18,7 @@ public class TrashService implements TrashApi {
     private final TrashPersistenceSpi spi;
 
     @Override
+    @Transactional
     public Either<ApplicationError, Trash> create(Trash trash) {
         return TrashValidator.validate(trash)
                 .toEither()

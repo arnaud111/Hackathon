@@ -7,17 +7,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class WasteService implements WasteApi {
 
 
     @Override
+    @Transactional
     public List<String> getPackagingMaterial(String barcode) {
 
         try {
@@ -39,7 +42,7 @@ public class WasteService implements WasteApi {
 
             con.disconnect();
 
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             return null;
         }
 

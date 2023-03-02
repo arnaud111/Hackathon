@@ -9,6 +9,8 @@ import com.greenring.hackathon.domain.port.client.DistributorApi;
 import com.greenring.hackathon.domain.port.server.DistributorPersistenceSpi;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class DistributorService implements DistributorApi {
@@ -16,6 +18,7 @@ public class DistributorService implements DistributorApi {
     private final DistributorPersistenceSpi spi;
 
     @Override
+    @Transactional
     public Either<ApplicationError, Distributor> create(Distributor distributor) {
         return DistributorValidator.validate(distributor)
                 .toEither()

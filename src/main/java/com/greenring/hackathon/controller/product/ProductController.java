@@ -6,6 +6,7 @@ import com.greenring.hackathon.domain.model.Distributor;
 import com.greenring.hackathon.domain.model.Product;
 import com.greenring.hackathon.domain.port.client.DistributorApi;
 import com.greenring.hackathon.domain.port.client.ProductApi;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

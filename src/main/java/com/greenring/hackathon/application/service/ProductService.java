@@ -9,6 +9,8 @@ import com.greenring.hackathon.domain.port.client.ProductApi;
 import com.greenring.hackathon.domain.port.server.ProductPersistenceSpi;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class ProductService implements ProductApi {
@@ -16,6 +18,7 @@ public class ProductService implements ProductApi {
     private final ProductPersistenceSpi spi;
 
     @Override
+    @Transactional
     public Either<ApplicationError, Product> create(Product product) {
         return ProductValidator.validate(product)
                 .toEither()
