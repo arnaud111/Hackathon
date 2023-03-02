@@ -1,23 +1,18 @@
 package com.greenring.hackathon.domain;
 
-import com.greenring.hackathon.application.service.DistributorService;
-import com.greenring.hackathon.application.service.ProductService;
-import com.greenring.hackathon.application.service.TrashService;
-import com.greenring.hackathon.application.service.UserService;
-import com.greenring.hackathon.domain.port.client.DistributorApi;
-import com.greenring.hackathon.domain.port.client.ProductApi;
-import com.greenring.hackathon.domain.port.client.TrashApi;
-import com.greenring.hackathon.domain.port.client.UserApi;
-import com.greenring.hackathon.domain.port.server.DistributorPersistenceSpi;
-import com.greenring.hackathon.domain.port.server.ProductPersistenceSpi;
-import com.greenring.hackathon.domain.port.server.TrashPersistenceSpi;
-import com.greenring.hackathon.domain.port.server.UserPersistenceSpi;
+import com.greenring.hackathon.application.service.*;
+import com.greenring.hackathon.domain.port.client.*;
+import com.greenring.hackathon.domain.port.server.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DomainConfiguration {
 
+    @Bean
+    TransactionApi transactionApi(TransactionPersistenceSpi transactionPersistenceSpi) {
+        return new TransactionService(transactionPersistenceSpi);
+    }
     @Bean
     DistributorApi distributorApi(DistributorPersistenceSpi distributorPersistenceSpi, ProductPersistenceSpi productPersistenceSpi, UserPersistenceSpi userPersistenceSpi) {
         return new DistributorService(distributorPersistenceSpi,userPersistenceSpi,productPersistenceSpi);

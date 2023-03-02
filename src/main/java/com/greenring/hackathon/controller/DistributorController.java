@@ -43,7 +43,7 @@ public class DistributorController {
                 .getAll();
     }
 
-    @GetMapping(value = "/{distributor_id}/addProduct/{product_id}")
+    @PostMapping(value = "/{distributor_id}/addProduct/{product_id}")
     public ResponseEntity<Object> addProduct(@PathVariable UUID distributor_id, @PathVariable UUID product_id) {
         return distributorApi
                 .addProduct(distributor_id,product_id)
@@ -51,7 +51,7 @@ public class DistributorController {
                 .fold(ResponseEntity.badRequest()::body, ResponseEntity::ok);
     }
 
-    @GetMapping(value = "/{distributor_id}/buyProduct/{product_id}/{user_id}")
+    @PutMapping(value = "/{distributor_id}/buyProduct/{product_id}/{user_id}")
     public ResponseEntity<Object> buyProduct(@PathVariable UUID distributor_id, @PathVariable UUID product_id, @PathVariable UUID user_id) {
         return distributorApi
                 .buyProduct(distributor_id,product_id,user_id)
