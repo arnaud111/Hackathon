@@ -11,7 +11,7 @@ public class User {
     @Builder.Default UUID _id = UUID.randomUUID();
     String login;
     String password;
-    @Builder.Default int coins = 0;
+    @Builder.Default Integer coins = 0;
     String firstname;
     String lastname;
 }
