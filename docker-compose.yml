@@ -6,4 +6,4 @@ services:
     restart: "always"
     tty: true
     ports:
-      - "8080:8080"
+      - "7790:7790"
