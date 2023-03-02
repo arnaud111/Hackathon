@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.greenring</groupId>
     <artifactId>Hackathon</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Hackathon</name>
     <description>Hackathon</description>
     <properties>
