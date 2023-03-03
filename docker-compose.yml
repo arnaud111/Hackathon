@@ -7,3 +7,10 @@ services:
     tty: true
     ports:
       - "7790:7790"
+  Hackathon_AI_API:
+    container_name: "Hackaton_ai_api"
+    image: dixennaxos/hackathon-ai-api:latest
+    restart: "always"
+    tty: true
+    ports:
+      - "7590:7590"
