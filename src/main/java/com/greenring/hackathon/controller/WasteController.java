@@ -2,7 +2,6 @@ package com.greenring.hackathon.controller;
 
 import com.greenring.hackathon.application.dto.WasteTrashResponse;
 import com.greenring.hackathon.application.service.WasteService;
-import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Api
 @RequestMapping("/wastes")
 public class WasteController {
 

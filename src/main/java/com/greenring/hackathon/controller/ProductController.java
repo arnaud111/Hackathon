@@ -3,9 +3,7 @@ package com.greenring.hackathon.controller;
 import com.greenring.hackathon.application.dto.ProductCreationDto;
 import com.greenring.hackathon.application.mapper.ProductDtoMapper;
 import com.greenring.hackathon.domain.model.Product;
-import com.greenring.hackathon.domain.model.Product;
 import com.greenring.hackathon.domain.port.client.ProductApi;
-import io.swagger.annotations.Api;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +16,6 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@Api
 @RequestMapping("/products")
 public class ProductController {
 

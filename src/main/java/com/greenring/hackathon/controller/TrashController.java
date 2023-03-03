@@ -4,7 +4,6 @@ import com.greenring.hackathon.application.dto.TrashCreationDto;
 import com.greenring.hackathon.application.mapper.TrashDtoMapper;
 import com.greenring.hackathon.domain.model.Trash;
 import com.greenring.hackathon.domain.port.client.TrashApi;
-import io.swagger.annotations.Api;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,7 +16,6 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@Api
 @RequestMapping("/trashs")
 public class TrashController {
 

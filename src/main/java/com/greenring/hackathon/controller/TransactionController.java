@@ -5,7 +5,6 @@ import com.greenring.hackathon.application.dto.TransactionSearchDto;
 import com.greenring.hackathon.application.mapper.TransactionDtoMapper;
 import com.greenring.hackathon.domain.model.Transaction;
 import com.greenring.hackathon.domain.port.client.TransactionApi;
-import io.swagger.annotations.Api;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,7 +23,6 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@Api
 @RequestMapping("/transactions")
 public class TransactionController {
 

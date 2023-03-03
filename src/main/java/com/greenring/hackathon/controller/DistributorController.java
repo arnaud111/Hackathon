@@ -7,7 +7,6 @@ import com.greenring.hackathon.domain.model.Distributor;
 import com.greenring.hackathon.domain.port.client.DistributorApi;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
-import io.swagger.annotations.Api;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@Api
 @RequestMapping("/distributors")
 public class DistributorController {
 
